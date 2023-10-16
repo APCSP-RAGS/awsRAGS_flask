@@ -25,7 +25,7 @@ charactersong_list = [
 ]
 
 # Initialize CharacterSongs
-def initCharacterSongs():
+def initSongs():
     # setup CharacterSongs into a dictionary with id, CharacterSong, haha, boohoo
     global item_id
     item_id = 0
@@ -34,34 +34,34 @@ def initCharacterSongs():
         item_id += 1
     # prime some haha responses
     for i in range(10):
-        id = getRandomCharacterSong()['id']
-        addCharacterSongHaHa(id)
+        id = getRandomSong()['id']
+        addSongHaHa(id)
     # prime some haha responses
     for i in range(5):
-        id = getRandomCharacterSong()['id']
-        addCharacterSongBooHoo(id)
+        id = getRandomSong()['id']
+        addSongBooHoo(id)
         
 # Function to add CharacterSongs(for create method)
-def createCharacterSong(CharacterSong):
+def createSong(CharacterSong):
     item_id = len(charactersongs_data)
     charactersongs_data.append({"id": item_id, "CharacterSong": CharacterSong, "haha": 0, "boohoo": 0})
     
 
 
 # Return all CharacterSongs from charactersongs_data
-def getCharacterSongs():
+def getSongs():
     return(charactersongs_data)
 
 # CharacterSong getter
-def getCharacterSong(id):
+def getSong(id):
     return(charactersongs_data[id])
 
 # Return random CharacterSong from charactersongs_data
-def getRandomCharacterSong():
+def getRandomSong():
     return(random.choice(charactersongs_data))
 
 # Liked CharacterSong
-def favoriteCharacterSong():
+def favoriteSong():
     best = 0
     bestID = -1
     for CharacterSong in getCharacterSongs():
@@ -71,48 +71,48 @@ def favoriteCharacterSong():
     return charactersongs_data[bestID]
     
 # Jeered CharacterSong
-def jeeredCharacterSong():
+def jeeredSong():
     worst = 0
     worstID = -1
-    for CharacterSong in getCharacterSongs():
+    for CharacterSong in getSongs():
         if CharacterSong['boohoo'] > worst:
             worst = CharacterSong['boohoo']
             worstID = CharacterSong['id']
     return charactersongs_data[worstID]
 
 # Add to haha for requested id
-def addCharacterSongHaHa(id):
+def addSongHaHa(id):
     charactersongs_data[id]['haha'] = charactersongs_data[id]['haha'] + 1
     return charactersongs_data[id]['haha']
 
 # Add to boohoo for requested id
-def addCharacterSongBooHoo(id):
+def addSongBooHoo(id):
     charactersongs_data[id]['boohoo'] = charactersongs_data[id]['boohoo'] + 1
     return charactersongs_data[id]['boohoo']
 
 # Pretty Print CharacterSong
-def printCharacterSong(CharacterSong):
+def printSong(CharacterSong):
     print(CharacterSong['id'], CharacterSong['CharacterSong'], "\n", "haha:", CharacterSong['haha'], "\n", "boohoo:", CharacterSong['boohoo'], "\n")
 
 # Number of CharacterSongs
-def countCharacterSongs():
+def countSongs():
     return len(charactersongs_data)
 
 # Test CharacterSong Model
 if __name__ == "__main__": 
-    initCharacterSongs()  # initialize CharacterSongs
+    initSongs()  # initialize CharacterSongs
     
     # Most likes and most jeered
-    best = favoriteCharacterSong()
+    best = favoriteSong()
     print("Most liked", best['haha'])
-    printCharacterSong(best)
-    worst = jeeredCharacterSong()
+    printSong(best)
+    worst = jeeredSong()
     print("Most jeered", worst['boohoo'])
-    printCharacterSong(worst)
+    printSong(worst)
     
     # Random CharacterSong
     print("Random CharacterSong")
-    printCharacterSong(getRandomCharacterSong())
+    printSong(getRandomSong())
     
     # Count of CharacterSongs
-    print("CharacterSongs Count: " + str(countCharacterSongs()))
+    print("CharacterSongs Count: " + str(countSongs()))
