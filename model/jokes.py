@@ -27,6 +27,7 @@ joke_list = [
 # Initialize jokes
 def initJokes():
     # setup jokes into a dictionary with id, joke, haha, boohoo
+    global item_id
     item_id = 0
     for item in joke_list:
         jokes_data.append({"id": item_id, "joke": item, "haha": 0, "boohoo": 0})
@@ -40,6 +41,13 @@ def initJokes():
         id = getRandomJoke()['id']
         addJokeBooHoo(id)
         
+# Function to add jokes(for create method)
+def createJoke(joke):
+    item_id = len(jokes_data)
+    jokes_data.append({"id": item_id, "joke": joke, "haha": 0, "boohoo": 0})
+    
+
+
 # Return all jokes from jokes_data
 def getJokes():
     return(jokes_data)
