@@ -23,7 +23,8 @@ class songAPI(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument("character", type=str)
         parser.add_argument("song_name", type=str)
-        parser.add_argument("era", type=str)
+        parser.add_argument("artist", type=str)
+        parser.add_argument("genre", type=str)
         args = parser.parse_args()
 
         try:
@@ -33,8 +34,10 @@ class songAPI(Resource):
                     song.song_name = args["song_name"]
                 if args["character"] is not None:
                     song.character = args["character"]
-                if args["era"] is not None:
-                    song.era = args["era"]
+                if args["genre"] is not None:
+                    song.genre = args["genre"]
+                if args["artist"] is not None:
+                    song.artist = args["artist"]
                 db.session.commit()
                 return song.to_dict(), 200
             else:
@@ -74,9 +77,10 @@ class songListAPI(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument("song_name", required=True, type=str)
         parser.add_argument("character", required=True, type=str)
-        parser.add_argument("era", required=True, type=str) 
+        parser.add_argument("genre", required=True, type=str) 
+        parser.add_argument("artist", required=True, type=str) 
         args = parser.parse_args()
-        song = song(args["song_name"], args["character"], args["era"], args["price"])
+        song = song(args["song_name"], args["character"], args["genre"], args["artist"])
 
         try:
             db.session.add(song)
