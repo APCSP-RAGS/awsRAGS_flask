@@ -14,6 +14,26 @@ class Song(db.Model):
         self.genre = genre
     def to_dict(self):
         return {"character": self.character, "song_name": self.song_name, "artist": self.artist, "genre": self.genre}
+    def create(self):
+        try:
+            # creates a person object from User(db.Model) class, passes initializers
+            db.session.add(self)  # add prepares to persist person object to Users table
+            db.session.commit()  # SqlAlchemy "unit of work pattern" requires a manual commit
+            return self
+        except:
+            db.session.remove()
+            return None
+    def read(self):
+        return {
+            "character": self.character,
+            "song_name": self.song_name,
+            "artist": self.artist,
+            "genre": self.genre,
+        }
+
+
+# Initialize songs
+
 def initSongs():
     # You can keep the rest of your code as is
     song1 = Song(character="Walter White", song_name="Changes", artist="David Bowie", genre="Art Pop"); db.session.add(song1)#replace with real data
