@@ -20,9 +20,9 @@ class SongAPI:
             song_name = body.get('song_name')
             artist = body.get('artist')
             genre = body.get('genre')
-
+            lyrics = body.get('lyrics')
             # Set up Song class object
-            song_obj = Song(character=character, song_name=song_name, artist=artist, genre=genre)
+            song_obj = Song(character=character, song_name=song_name, artist=artist, genre=genre, lyrics=lyrics)
             
             ''' #2: Key Code block to add song to database '''
             # create song in database
