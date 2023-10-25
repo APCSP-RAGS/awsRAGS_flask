@@ -31,7 +31,7 @@ class SongAPI:
             if song:
                 return jsonify(song.read())
             # failure returns error
-            return {'message': f'Invalid input, correct fields should be character, song_name, artist, and genre'}, 400
+            return {'message': f'Invalid input, correct fields should be character, song_name, lyrics, artist, and genre'}, 400
 
             
     class _Read(Resource):
