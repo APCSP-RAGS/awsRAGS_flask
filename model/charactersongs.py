@@ -3,6 +3,7 @@ from lyricsgenius import Genius
 
 token = "LicaWYTkX6bWFSV8c1QlTl7O9gLPZh7TvO3ZpR9OOwYe_GajHsIEebEvppPhY9V7"
 
+genius = Genius(token)
 class Song(db.Model):
     __tablename__ = "Song"
     id = db.Column(db.Integer, primary_key=True)  # Define a primary key column
@@ -45,9 +46,9 @@ class Song(db.Model):
 
 def initSongs():
     # Adds each song + its metadata to the db
-    song1 = Song(character="Walter White", song_name="Changes", artist="David Bowie", genre="Art Pop", lyrics=ge); db.session.add(song1)#replace with real data
-    song2 = Song(character="Walter White", song_name="Back in Black", artist="AC/DC", genre="Hard Rock"); db.session.add(song2)
-    song3 = Song(character="Walter White", song_name="Baby Blue", artist="Badfinger", genre="Rock"); db.session.add(song3)
+    song1 = Song(character="Walter White", song_name="Changes", artist="David Bowie", genre="Art Pop", lyrics=genius.search_song("Changes", "David Bowie").lyrics); db.session.add(song1)#replace with real data
+    song2 = Song(character="Walter White", song_name="Back in Black", artist="AC/DC", genre="Hard Rock", lyrics=genius.search_song("Back in Black", "AC/DC").lyrics); db.session.add(song2)
+    song3 = Song(character="Walter White", song_name="Baby Blue", artist="Badfinger", genre="Rock", lyrics=genius.search_song("Baby Blue", "Badfinger").lyrics); db.session.add(song3)
     # song4 = Song(character="Walter White", song_name="A Horse with No Name", artist="America", genre="Soft Rock"); db.session.add(song4)
     # song5 = Song(character="Walter White", song_name="Crystal Blue Persuasion", artist="Tommy James and the Shondells", genre="Rock"); db.session.add(song5)
     # song6 = Song(character="Walter White", song_name="Sweet Home Alabama", artist="Lynyrd Skynyrd", genre="Southern Rock"); db.session.add(song6)
