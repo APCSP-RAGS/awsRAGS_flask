@@ -3,7 +3,7 @@ from __init__ import db
 class Song(db.Model):
     __tablename__ = "Song"
     id = db.Column(db.Integer, primary_key=True)  # Define a primary key column
-    character = db.Column(db.String, nullable=False)
+    character = db.Column(db.String, nullable=False) # Breaking bad character
     song_name = db.Column(db.String, nullable=False)
     artist = db.Column(db.String, nullable=False)
     genre = db.Column(db.String, nullable=False)
@@ -12,19 +12,22 @@ class Song(db.Model):
         self.song_name = song_name
         self.artist = artist
         self.genre = genre
+    # Convert db data to a dictionary in order to return easily using JSON
     def to_dict(self):
         return {"character": self.character, "song_name": self.song_name, "artist": self.artist, "genre": self.genre}
+    # Create method to let users add a song to the DB
     def create(self):
         try:
-            # creates a person object from User(db.Model) class, passes initializers
-            db.session.add(self)  # add prepares to persist person object to Users table
-            db.session.commit()  # SqlAlchemy "unit of work pattern" requires a manual commit
+            db.session.add(self)  # add prepares to persist object to table
+            db.session.commit()  # SQLAlchemy requires a manual commit
             return self
-        except:
-            db.session.remove()
+        except: 
+            db.session.remove() # remove object from table if invalid
             return None
+    # Read method to return every part of the table
     def read(self):
         return {
+            "id": self.id,
             "character": self.character,
             "song_name": self.song_name,
             "artist": self.artist,
@@ -35,7 +38,7 @@ class Song(db.Model):
 # Initialize songs
 
 def initSongs():
-    # You can keep the rest of your code as is
+    # Adds each song + its metadata to the db
     song1 = Song(character="Walter White", song_name="Changes", artist="David Bowie", genre="Art Pop"); db.session.add(song1)#replace with real data
     song2 = Song(character="Walter White", song_name="Back in Black", artist="AC/DC", genre="Hard Rock"); db.session.add(song2)
     song3 = Song(character="Walter White", song_name="Baby Blue", artist="Badfinger", genre="Rock"); db.session.add(song3)

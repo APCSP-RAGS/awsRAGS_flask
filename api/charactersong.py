@@ -11,7 +11,6 @@ song_api = Blueprint('song_api', __name__, url_prefix='/api/song')
 api = Api(song_api)
 
 class SongAPI:
-    # not implemented
     class _Create(Resource):
         def post(self):
             # get request body
