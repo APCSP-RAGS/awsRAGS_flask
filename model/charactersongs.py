@@ -7,7 +7,7 @@ class Song(db.Model):
     song_name = db.Column(db.String, nullable=False)
     artist = db.Column(db.String, nullable=False)
     genre = db.Column(db.String, nullable=False)
-    def __init__(self, character, song_name, artist, genre):
+    def __init__(self, character, song_name, artist, genre): # Constructer 
         self.character = character
         self.song_name = song_name
         self.artist = artist
