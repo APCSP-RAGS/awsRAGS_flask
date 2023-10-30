@@ -1,7 +1,7 @@
 import threading
 
 # import "packages" from flask
-from flask import render_template  # import render_template from "public" flask libraries
+from flask import render_template, send_from_directory  # import render_template from "public" flask libraries
 
 # import "packages" from "this" project
 from __init__ import app,db  # Definitions initialization
@@ -45,6 +45,10 @@ def index():
 @app.route('/table/')  # connects /stub/ URL to stub() function
 def table():
     return render_template("table.html")
+
+@app.route('/memes/<path:path>')
+def send_report(path):
+    return send_from_directory('memes', path)
 
 @app.before_first_request
 def activate_job():  # activate these items 
