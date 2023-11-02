@@ -27,6 +27,10 @@ class Song(db.Model):
     # Create method to let users add a song to the DB
     def create(self):
         try:
+            try:
+                self.lyrics = genius.search_song(self.song_name, self.artist).lyrics.split("Lyrics")[1]
+            except:
+                self.lyrics = "Check that the artist name and song anme are spelled correctly"
             db.session.add(self)  # add prepares to persist object to table
             db.session.commit()  # SQLAlchemy requires a manual commit
             return self
